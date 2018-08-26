@@ -10,9 +10,13 @@ app.use(cors())
 
 app.get('/api/user', function(req, res) {
     fs.readFile('assets/UID-' + req.query.id + '.json', function(err, file) {
+
         if (err) {
+            console.log('err: ', err);
             res.send({ err: true });
         } else {
+            console.log('file: ', file);
+
             res.send(JSON.parse(file))
         }
     });
