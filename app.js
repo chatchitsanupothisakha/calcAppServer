@@ -1,46 +1,29 @@
-const express = require('express')
+const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
-const AWS = require("aws-sdk");
+const cors = require('cors');
+const fs = require('fs');
 
 const app = express()
 
 app.use(bodyParser.json());
 app.use(cors())
 
-AWS.config.update({
-    region: "ap-southeast-1",
-    endpoint: "https://dynamodb.ap-southeast-1.amazonaws.com"
-});
-var docClient = new AWS.DynamoDB.DocumentClient();
-var table = "user";
-
 app.get('/api/user', function(req, res) {
-    var params = {
-        TableName: table,
-        Key: {
-            "id": req.query.id
-        }
-    };
-    docClient.get(params, function(err, data) {
+    fs.readFile('assets/UID-' + req.query.id + '.json', function(err, file) {
         if (err) {
-            res.send(err);
+            res.send({ err: true });
         } else {
-            res.send(data);
+            res.send(JSON.parse(file))
         }
     });
 });
 app.post('/api/user', function(req, res) {
-    var params = {
-        TableName: table,
-        Item: req.body
-    };
-    docClient.put(params, function(err, data) {
+    fs.writeFile('assets/UID-' + req.body.id + '.json', JSON.stringify(req.body), function(err) {
         if (err) {
-            res.send(err);
+            res.send(err)
         } else {
-            res.send("Save Complete!");
+            res.send('save complete!');
         }
     });
 });
-app.listen(process.env.port || 8081, () => console.log('app run!'))
+app.listen(process.env.port || 8081, () => console.log('app run!'));
