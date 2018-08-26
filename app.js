@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const PORT = process.env.PORT || 5000
+
 // const MongoClient = require('mongodb').MongoClient;
 // const url = process.env.MONGODB_URI
 // const dbName = 'heroku_t6bp9lvd';
@@ -33,4 +35,4 @@ app.post('/api/user', function(req, res) {
     //     });
     // });
 });
-app.listen(process.env.port || 8081, () => console.log('app run!'));
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
