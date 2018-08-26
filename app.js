@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;
-const url = MONGODB_URI;
+const url = process.env.MONGODB_URI;
 const dbName = 'heroku_t6bp9lvd';
 const collection = 'UserData';
 
