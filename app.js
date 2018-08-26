@@ -10,9 +10,7 @@ app.use(cors())
 
 AWS.config.update({
     region: "ap-southeast-1",
-    endpoint: "https://dynamodb.ap-southeast-1.amazonaws.com",
-    accessKeyId: 'AKIAIA3VB42566QX6O3A',
-    secretAccessKey: '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'
+    endpoint: "https://dynamodb.ap-southeast-1.amazonaws.com"
 });
 var docClient = new AWS.DynamoDB.DocumentClient();
 var table = "user";
@@ -41,7 +39,7 @@ app.post('/api/user', function(req, res) {
         if (err) {
             res.send(err);
         } else {
-            res.send("Complete");
+            res.send("Save Complete!");
         }
     });
 });
