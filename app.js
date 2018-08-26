@@ -28,7 +28,7 @@ app.post('/api/user', function(req, res) {
         const db = client.db(dbName);
         db.collection(collection).save(req.body, function(err, r) {
             client.close();
-            res.send('save complete!');
+            res.send('save complete');
         });
     });
 });
