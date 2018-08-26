@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(cors())
 
 app.get('/api/user', function(req, res) {
-    fs.readFile('assets/UID-' + req.query.id + '.json', function(err, file) {
+    fs.readFile('UID-' + req.query.id + '.json', function(err, file) {
 
         if (err) {
             console.log('err: ', err);
@@ -22,7 +22,7 @@ app.get('/api/user', function(req, res) {
     });
 });
 app.post('/api/user', function(req, res) {
-    fs.writeFile('assets/UID-' + req.body.id + '.json', JSON.stringify(req.body), function(err) {
+    fs.writeFile('UID-' + req.body.id + '.json', JSON.stringify(req.body), function(err) {
         if (err) {
             res.send(err)
         } else {
